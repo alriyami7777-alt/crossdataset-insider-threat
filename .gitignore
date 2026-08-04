@@ -1,0 +1,58 @@
+# ---- Raw data & large artefacts (never commit; see docs/DATASETS.md) ----
+data/
+datasets/
+*.csv.gz
+*.txt.gz
+auth.txt*
+redteam.txt*
+logs_SPEDIA.csv
+CERT_r*/
+lanl/
+answers/
+*.parquet
+
+# ---- Model / experiment artefacts ----
+artifacts/
+checkpoints/
+*.pt
+*.pth
+*.pkl
+*.joblib
+results/**/*.csv
+results/**/*.png
+!results/.gitkeep
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.python-version
+
+# ---- Notebooks scratch ----
+*-checkpoint.ipynb
+
+# ---- LaTeX aux (if manuscript is added later) ----
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
