@@ -5,11 +5,11 @@ D:cert42-base,0.0027,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/l
 D:cert52-rf,0.945,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
 D:cert52-lift,480x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
 D:cert52-base,0.002,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
-D:cert62-rf,0.028,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
-D:cert62-lift,3982x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
+D:cert62-rf,0.028,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds; cert62 reported n/e in paper (only 44 positive user-days)
+D:cert62-lift,3982x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift; cert62 reported n/e in paper (44 positives)
 D:cert62-base,1.1e-05,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
 D:spedia-rf,0.989,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
-D:spedia-lift,3x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
+D:spedia-lift,2.4x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift (= 0.989 / 0.41 base rate)
 D:spedia-base,0.41,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
 D:lanl-rf,0.056,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
 D:lanl-lift,124x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
@@ -19,23 +19,23 @@ D:cert52-temp,0.854,multiseed_releases_details_core.csv,"day_gnn_zero_shot user_
 D:spedia-temp,0.828,multiseed_releases_details_core.csv,"day_gnn_zero_shot user_disjoint diagonal (paper Temporal PR-AUC = temporal-GNN ID, not temporal-split); n_seeds=5; source=multiseed_releases_details_core.csv"
 M:cert42-cert42,0.959,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:cert42-rf; lift=358x
 M:cert42-cert52,0.597,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=317x; n_seeds=5
-M:cert42-spedia,0.488,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=2x; n_seeds=5
-M:cert42-lanl,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=9x; n_seeds=5
+M:cert42-spedia,0.488,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1.5x; n_seeds=5
+M:cert42-lanl,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=9.3x; n_seeds=5
 M:cert52-cert42,0.946,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=324x; n_seeds=5
 M:cert52-cert52,0.945,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:cert52-rf; lift=480x
-M:cert52-spedia,0.463,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1x; n_seeds=5
-M:cert52-lanl,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=9x; n_seeds=5
+M:cert52-spedia,0.463,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1.4x; n_seeds=5
+M:cert52-lanl,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=8.9x; n_seeds=5
 M:cert62-cert42,0.249,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=85x; n_seeds=5
 M:cert62-cert52,0.260,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=138x; n_seeds=5
-M:cert62-spedia,0.544,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=2x; n_seeds=5
+M:cert62-spedia,0.544,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1.7x; n_seeds=5
 M:cert62-lanl,0.017,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=37x; n_seeds=5
 M:spedia-cert42,0.076,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=26x; n_seeds=5
 M:spedia-cert52,0.040,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=21x; n_seeds=5
-M:spedia-spedia,0.989,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:spedia-rf; lift=3x
+M:spedia-spedia,0.989,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:spedia-rf; lift=2.4x
 M:spedia-lanl,0.006,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=13x; n_seeds=5
-M:lanl-cert42,0.003,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1x; n_seeds=5
-M:lanl-cert52,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=2x; n_seeds=5
-M:lanl-spedia,0.360,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1x; n_seeds=5
+M:lanl-cert42,0.003,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1.0x; n_seeds=5
+M:lanl-cert52,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=2.1x; n_seeds=5
+M:lanl-spedia,0.360,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1.1x; n_seeds=5
 M:lanl-lanl,0.056,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:lanl-rf; lift=124x
 M:gap-aggregate,0.484,transfer_matrix_phaseA_checkpoint.csv,transparency stat; mixes ~1000x base rates
 C2:cert52-spedia-gnn,0.636,transfer_matrix_phaseA_checkpoint.csv,day_gnn_zero_shot; n_seeds=5
@@ -100,5 +100,5 @@ G:cert62-lanl-mmd,0.316,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
 G:spedia-lanl-lr,0.948,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
 G:spedia-lanl-da,1.539,domain_gap_summary.csv,proxy A-distance d̂_A
 G:spedia-lanl-mmd,0.144,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
-R:corr-r,-0.528,transfer_matrix_phaseA_checkpoint.csv,"Pearson(symmetric dA, RF off-diag LIFT); n=20 directed cells; sources=transfer_matrix_phaseA_checkpoint.csv+domain_gap_summary.csv; spedia (n=256) point is high-variance"
-R:corr-p,0.01659,transfer_matrix_phaseA_checkpoint.csv,"Pearson(symmetric dA, RF off-diag LIFT); n=20 directed cells; sources=transfer_matrix_phaseA_checkpoint.csv+domain_gap_summary.csv; spedia (n=256) point is high-variance"
+R:corr-r,-0.528,transfer_matrix_phaseA_checkpoint.csv,"SUPERSEDED / NOT REPORTED IN PAPER: Pearson(symmetric dA, RF off-diag LIFT) over n=20 directed cells is an artifact of the 4 degenerate cert62-as-target cells the paper excludes as n/e; recomputed on the 16 valid cells r~-0.07 (non-significant), so the paper reports the domain gap qualitatively with no distance-to-transfer correlation"
+R:corr-p,0.01659,transfer_matrix_phaseA_checkpoint.csv,"SUPERSEDED / NOT REPORTED IN PAPER: p-value for the n=20 correlation above; driven by the excluded cert62 cells; on the 16 valid cells the association is non-significant"
