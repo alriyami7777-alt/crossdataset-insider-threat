@@ -1,18 +1,16 @@
-# Core dependencies for the cross-dataset insider threat benchmark.
-# Version lower bounds are indicative; the exact pinned versions used for the
-# reported experiments will be frozen (pip freeze) and committed with the code
-# release at submission.
-
+# Core (needed for the synthetic smoke test + baselines) -- runs anywhere
 numpy>=1.24
 pandas>=2.0
-scipy>=1.10
 scikit-learn>=1.3
-torch>=2.1
+scipy>=1.10
 pyyaml>=6.0
-tqdm>=4.66
-matplotlib>=3.7
+tqdm>=4.65
 
-# Notes:
-# - torch is CPU-installable for smoke tests; a CUDA build is recommended for the
-#   temporal graph models on the larger datasets (e.g. LANL).
-# - The pipeline uses plain PyTorch (no torch_geometric) to keep setup light.
+# Deep models (needed on the GPU box / Cursor for the temporal GNN + DANN)
+# Install torch matching your CUDA, then PyG. See CURSOR_PROMPT.md.
+torch>=2.1
+torch-geometric>=2.4
+
+# Plots / dev
+matplotlib>=3.7
+pytest>=7.4

@@ -1,0 +1,35 @@
+# Central config. Cross-dataset experiments read from here.
+seed: 7
+
+# Dataset file paths. Leave null to fall back to the synthetic generator.
+# Fill these in on the machine that has the real data (Cursor / GPU box).
+data:
+  cert:   null          # dir of CERT r5.2/r6.2 csvs
+  lanl:   null          # path to auth.txt (+ redteam.txt alongside)
+  twos:   null          # TWOS root once access is granted
+  spedia: "C:/PhD/04_Journal_Papers/New Paper Aug 2026/logs_SPEDIA.csv"
+  spedia_real_only: true   # drop CERT-derived rows for clean cross-dataset
+
+# Which datasets participate in the cross-dataset matrix.
+datasets: [cert, spedia, lanl, twos]
+
+# Model to run as the matrix cell detector.
+model: isolation_forest   # isolation_forest | ocsvm | temporal_gnn | athitd | transformer
+
+metric: pr_auc            # headline metric
+
+temporal_gnn:
+  mem_dim: 64
+  time_dim: 16
+  lr: 0.001
+  epochs: 20
+  batch_edges: 4096
+  ssl_pretrain_epochs: 5   # masked-action self-supervised pretraining
+
+dann:
+  enabled: true
+  gamma: 10.0              # lambda-schedule steepness
+
+eval:
+  target_fprs: [0.01, 0.05]
+  bootstrap: 1000

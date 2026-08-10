@@ -1,25 +1,14 @@
 cff-version: 1.2.0
-message: "If you use this benchmark or code, please cite the following work."
+message: "If you use this benchmark or code, please cite the accompanying paper (under review)."
 title: "Does It Generalize? A Cross-Dataset Study of Graph-Based Insider Threat Detection Beyond CERT"
-type: software
 authors:
   - family-names: "Alriyami"
     given-names: "Qasim Mohamed Muhanna"
-    affiliation: "Faculty of Computing, Universiti Teknologi Malaysia"
-    email: "mohamedmuhanna@graduate.utm.my"
+    affiliation: "Universiti Teknologi Malaysia"
   - family-names: "Mohamad"
     given-names: "Mohd Murtadha Bin"
-    affiliation: "Faculty of Computing, Universiti Teknologi Malaysia"
+    affiliation: "Universiti Teknologi Malaysia"
+year: 2026
+notes: "Paper under review (IJACSA). A full citation will be added on acceptance."
 repository-code: "https://github.com/alriyami7777-alt/crossdataset-insider-threat"
-keywords:
-  - insider threat detection
-  - cross-dataset generalization
-  - graph neural networks
-  - temporal graphs
-  - unsupervised domain adaptation
-  - explainable artificial intelligence
 license: MIT
-date-released: 2026-01-01
-version: "0.1.0-scaffold"
-# A preferred-citation block with the published venue and DOI will be added once
-# the paper is accepted/published.

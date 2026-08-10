@@ -1,0 +1,104 @@
+token,value,source_file,note
+D:cert42-rf,0.959,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
+D:cert42-lift,358x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
+D:cert42-base,0.0027,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
+D:cert52-rf,0.945,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
+D:cert52-lift,480x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
+D:cert52-base,0.002,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
+D:cert62-rf,0.028,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
+D:cert62-lift,3982x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
+D:cert62-base,1.1e-05,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
+D:spedia-rf,0.989,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
+D:spedia-lift,3x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
+D:spedia-base,0.41,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
+D:lanl-rf,0.056,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal mean over 5 seeds
+D:lanl-lift,124x,transfer_matrix_phaseA_checkpoint.csv,RF user_disjoint diagonal lift
+D:lanl-base,0.00044,transfer_matrix_phaseA_checkpoint.csv,base rate (= PR-AUC/lift) from RF user_disjoint diagonal
+D:cert42-temp,0.890,multiseed_releases_details_core.csv,"day_gnn_zero_shot user_disjoint diagonal (paper Temporal PR-AUC = temporal-GNN ID, not temporal-split); n_seeds=5; source=multiseed_releases_details_core.csv"
+D:cert52-temp,0.854,multiseed_releases_details_core.csv,"day_gnn_zero_shot user_disjoint diagonal (paper Temporal PR-AUC = temporal-GNN ID, not temporal-split); n_seeds=5; source=multiseed_releases_details_core.csv"
+D:spedia-temp,0.828,multiseed_releases_details_core.csv,"day_gnn_zero_shot user_disjoint diagonal (paper Temporal PR-AUC = temporal-GNN ID, not temporal-split); n_seeds=5; source=multiseed_releases_details_core.csv"
+M:cert42-cert42,0.959,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:cert42-rf; lift=358x
+M:cert42-cert52,0.597,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=317x; n_seeds=5
+M:cert42-spedia,0.488,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=2x; n_seeds=5
+M:cert42-lanl,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=9x; n_seeds=5
+M:cert52-cert42,0.946,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=324x; n_seeds=5
+M:cert52-cert52,0.945,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:cert52-rf; lift=480x
+M:cert52-spedia,0.463,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1x; n_seeds=5
+M:cert52-lanl,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=9x; n_seeds=5
+M:cert62-cert42,0.249,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=85x; n_seeds=5
+M:cert62-cert52,0.260,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=138x; n_seeds=5
+M:cert62-spedia,0.544,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=2x; n_seeds=5
+M:cert62-lanl,0.017,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=37x; n_seeds=5
+M:spedia-cert42,0.076,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=26x; n_seeds=5
+M:spedia-cert52,0.040,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=21x; n_seeds=5
+M:spedia-spedia,0.989,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:spedia-rf; lift=3x
+M:spedia-lanl,0.006,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=13x; n_seeds=5
+M:lanl-cert42,0.003,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1x; n_seeds=5
+M:lanl-cert52,0.004,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=2x; n_seeds=5
+M:lanl-spedia,0.360,transfer_matrix_phaseA_checkpoint.csv,RF off-diag lift=1x; n_seeds=5
+M:lanl-lanl,0.056,transfer_matrix_phaseA_checkpoint.csv,diagonal copied from D:lanl-rf; lift=124x
+M:gap-aggregate,0.484,transfer_matrix_phaseA_checkpoint.csv,transparency stat; mixes ~1000x base rates
+C2:cert52-spedia-gnn,0.636,transfer_matrix_phaseA_checkpoint.csv,day_gnn_zero_shot; n_seeds=5
+C2:cert52-spedia-rf,0.463,transfer_matrix_phaseA_checkpoint.csv,random_forest; n_seeds=5
+C2:cert52-spedia-dpr,+0.173,transfer_matrix_phaseA_checkpoint.csv,mean(GNN)−mean(RF) over paired seeds
+C2:cert52-spedia-ci,"[+0.125, +0.226]",transfer_matrix_phaseA_checkpoint.csv,"paired bootstrap 5000 resamples, seed=0"
+C2:cert52-spedia-hold,Yes,transfer_matrix_phaseA_checkpoint.csv,Yes: Δ>0 & CI>0; RF: Δ≤0; No: CI includes 0
+C2:cert42-spedia-gnn,0.617,transfer_matrix_phaseA_checkpoint.csv,day_gnn_zero_shot; n_seeds=5
+C2:cert42-spedia-rf,0.488,transfer_matrix_phaseA_checkpoint.csv,random_forest; n_seeds=5
+C2:cert42-spedia-dpr,+0.128,transfer_matrix_phaseA_checkpoint.csv,mean(GNN)−mean(RF) over paired seeds
+C2:cert42-spedia-ci,"[+0.062, +0.195]",transfer_matrix_phaseA_checkpoint.csv,"paired bootstrap 5000 resamples, seed=0"
+C2:cert42-spedia-hold,Yes,transfer_matrix_phaseA_checkpoint.csv,Yes: Δ>0 & CI>0; RF: Δ≤0; No: CI includes 0
+C2:spedia-cert42-gnn,0.098,transfer_matrix_phaseA_checkpoint.csv,day_gnn_zero_shot; n_seeds=5
+C2:spedia-cert42-rf,0.076,transfer_matrix_phaseA_checkpoint.csv,random_forest; n_seeds=5
+C2:spedia-cert42-dpr,+0.022,transfer_matrix_phaseA_checkpoint.csv,mean(GNN)−mean(RF) over paired seeds
+C2:spedia-cert42-ci,"[-0.040, +0.095]",transfer_matrix_phaseA_checkpoint.csv,"paired bootstrap 5000 resamples, seed=0"
+C2:spedia-cert42-hold,No,transfer_matrix_phaseA_checkpoint.csv,Yes: Δ>0 & CI>0; RF: Δ≤0; No: CI includes 0
+C2:spedia-cert52-gnn,0.024,transfer_matrix_phaseA_checkpoint.csv,day_gnn_zero_shot; n_seeds=5
+C2:spedia-cert52-rf,0.040,transfer_matrix_phaseA_checkpoint.csv,random_forest; n_seeds=5
+C2:spedia-cert52-dpr,-0.017,transfer_matrix_phaseA_checkpoint.csv,mean(GNN)−mean(RF) over paired seeds
+C2:spedia-cert52-ci,"[-0.034, +0.000]",transfer_matrix_phaseA_checkpoint.csv,"paired bootstrap 5000 resamples, seed=0"
+C2:spedia-cert52-hold,RF,transfer_matrix_phaseA_checkpoint.csv,Yes: Δ>0 & CI>0; RF: Δ≤0; No: CI includes 0
+C2:cert52-cert42-gnn,0.858,transfer_matrix_phaseA_checkpoint.csv,day_gnn_zero_shot; n_seeds=5
+C2:cert52-cert42-rf,0.946,transfer_matrix_phaseA_checkpoint.csv,random_forest; n_seeds=5
+C2:cert52-cert42-dpr,-0.089,transfer_matrix_phaseA_checkpoint.csv,mean(GNN)−mean(RF) over paired seeds
+C2:cert52-cert42-ci,"[-0.110, -0.073]",transfer_matrix_phaseA_checkpoint.csv,"paired bootstrap 5000 resamples, seed=0"
+C2:cert52-cert42-hold,RF,transfer_matrix_phaseA_checkpoint.csv,Yes: Δ>0 & CI>0; RF: Δ≤0; No: CI includes 0
+C2:cert42-cert52-gnn,0.427,transfer_matrix_phaseA_checkpoint.csv,day_gnn_zero_shot; n_seeds=5
+C2:cert42-cert52-rf,0.597,transfer_matrix_phaseA_checkpoint.csv,random_forest; n_seeds=5
+C2:cert42-cert52-dpr,-0.170,transfer_matrix_phaseA_checkpoint.csv,mean(GNN)−mean(RF) over paired seeds
+C2:cert42-cert52-ci,"[-0.299, -0.092]",transfer_matrix_phaseA_checkpoint.csv,"paired bootstrap 5000 resamples, seed=0"
+C2:cert42-cert52-hold,RF,transfer_matrix_phaseA_checkpoint.csv,Yes: Δ>0 & CI>0; RF: Δ≤0; No: CI includes 0
+C2:wilcoxon-W,131.000,transfer_matrix_phaseA_checkpoint.csv,signed-rank over 20 off-diag GNN-vs-RF cells; n_gnn>rf=14
+C2:wilcoxon-p,0.1744,transfer_matrix_phaseA_checkpoint.csv,alternative=greater; n_pairs=20
+G:cert42-cert52-lr,0.998,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert42-cert52-da,1.949,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert42-cert52-mmd,0.087,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert42-cert62-lr,0.996,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert42-cert62-da,1.879,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert42-cert62-mmd,0.138,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert42-spedia-lr,1.000,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert42-spedia-da,1.977,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert42-spedia-mmd,0.156,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert42-lanl-lr,0.999,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert42-lanl-da,1.986,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert42-lanl-mmd,0.256,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert52-cert62-lr,0.868,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert52-cert62-da,1.226,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert52-cert62-mmd,0.100,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert52-spedia-lr,0.991,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert52-spedia-da,1.945,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert52-spedia-mmd,0.145,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert52-lanl-lr,1.000,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert52-lanl-da,1.991,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert52-lanl-mmd,0.302,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert62-spedia-lr,1.000,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert62-spedia-da,1.977,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert62-spedia-mmd,0.157,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:cert62-lanl-lr,0.999,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:cert62-lanl-da,1.986,domain_gap_summary.csv,proxy A-distance d̂_A
+G:cert62-lanl-mmd,0.316,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+G:spedia-lanl-lr,0.948,domain_gap_summary.csv,domain classifier LR-AUC (auc_lr_mean)
+G:spedia-lanl-da,1.539,domain_gap_summary.csv,proxy A-distance d̂_A
+G:spedia-lanl-mmd,0.144,domain_gap_summary.csv,MMD RBF (mmd_mean / mmd_rbf)
+R:corr-r,-0.528,transfer_matrix_phaseA_checkpoint.csv,"Pearson(symmetric dA, RF off-diag LIFT); n=20 directed cells; sources=transfer_matrix_phaseA_checkpoint.csv+domain_gap_summary.csv; spedia (n=256) point is high-variance"
+R:corr-p,0.01659,transfer_matrix_phaseA_checkpoint.csv,"Pearson(symmetric dA, RF off-diag LIFT); n=20 directed cells; sources=transfer_matrix_phaseA_checkpoint.csv+domain_gap_summary.csv; spedia (n=256) point is high-variance"

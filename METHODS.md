@@ -1,7 +1,9 @@
 # Methods and Protocol
 
 This document summarises the evaluation protocol so results in this repository are
-interpretable and reproducible. It mirrors the methodology of the paper.
+interpretable and reproducible. It mirrors the methodology of the paper, which evaluates
+**CERT, SPEDIA, and LANL** (TWOS and DARPA OpTC are named future extensions; see
+[`DATASETS.md`](DATASETS.md)).
 
 ## Prediction unit and label
 
@@ -59,17 +61,29 @@ or user memorisation.
 
 - **PR-AUC** is the headline metric because positive user-days are rare.
 - **Base-rate lift** (`PR-AUC / base_rate`) is reported alongside, since class
-  prevalence differs sharply across datasets (e.g. CERT ~0.3% vs SPEDIA ~25%).
+  prevalence differs sharply across datasets (CERT ≈ 0.2–0.3%, LANL ≈ 0.04%,
+  SPEDIA ≈ 41%).
 - **Generalization gap**: uniformly-weighted mean of diagonal cells minus
-  uniformly-weighted mean of off-diagonal cells, computed separately for the
-  temporal and user-disjoint diagonals.
+  uniformly-weighted mean of off-diagonal cells (the degenerate CERT r6.2 diagonal
+  is excluded). Reported as a transparency statistic — because it mixes targets whose
+  base rates differ by ~1000×, the per-cell transfer matrix is the primary evidence.
 - All metrics are accompanied by **stratified bootstrap confidence intervals**;
-  transfer deltas are reported with CIs that must exclude zero to be claimed.
+  transfer deltas are claimed only when the CI excludes zero.
+
+## Domain gap
+
+Distributional distance between domains is reported with a domain-classifier
+proxy-Â-distance and MMD on the aligned feature space, as a **descriptive** indicator
+of where transfer is hardest. It is not treated as a quantitative law: proxy-Â-distance
+is saturated near its maximum for almost all pairs (within-CERT pairs are near-maximal
+yet still transfer well, while transfers into LANL collapse at comparable distance), so
+the per-cell transfer matrix remains the primary evidence.
 
 ## Explainability as a transfer diagnostic
 
-Integrated gradients (over aligned features and action embeddings) and temporal
-edge occlusion produce per-domain attribution profiles. Comparing source and
-target profiles separates signals that stay influential across datasets from those
-that behave as dataset-specific artefacts. These explanations are interpreted
+Integrated gradients over the **aligned user-day features** produce per-domain attribution
+profiles; comparing source and target profiles separates signals that stay influential
+across datasets from those that behave as dataset-specific artefacts. Action-embedding
+attribution and temporal-edge occlusion are complementary event-level diagnostics outlined
+for future analysis rather than quantified here. These explanations are interpreted
 diagnostically, not causally.
