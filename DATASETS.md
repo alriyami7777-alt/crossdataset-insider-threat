@@ -1,49 +1,36 @@
 # Datasets
 
-This study evaluates cross-dataset generalization across **three independently constructed
-insider-threat families (five domains)**. None of the datasets are redistributed here; obtain each
-from its original source and place it under a local `data/` directory (git-ignored).
+The camera-ready benchmark evaluates **CERT, SPEDIA and LANL**. None of the datasets are redistributed here. Obtain each one from its original source and point `ITD_DATA_ROOT` at it (see [`camera_ready_strict_2026_09/README.md`](camera_ready_strict_2026_09/README.md)).
 
-## Evaluated in this study
+## Evaluated in the paper
 
 | Dataset | Type | Source | Role |
 |---|---|---|---|
-| **CERT** r4.2 / r5.2 / r6.2 | synthetic | CMU-SEI Insider Threat Test Dataset (Glasser & Lindauer, 2013) | Controlled source family; answer-key traitor labels. Three releases used as separate domains. |
-| **SPEDIA** | real | Zenodo `10.5281/zenodo.15495572` | Primary real target; CERT-derived rows removed for a clean comparison. |
-| **LANL** | real | LANL Comprehensive Multi-Source Cyber-Security Events (Kent, 2015) | Real intrusion-oriented domain; labelled red-team (lateral-movement) activity. |
+| **CERT** r4.2 / r5.2 / r6.2 | synthetic | CMU-SEI Insider Threat Test Dataset (Glasser & Lindauer, 2013) | Source domains. r4.2 and r5.2 are also targets. r6.2 is a source only (44 positive user-days, below the criterion of 50). |
+| **SPEDIA** | real | Zenodo `10.5281/zenodo.15495572` | Target and source. CERT-derived rows are removed. |
+| **LANL** | real | LANL Comprehensive Multi-Source Cyber-Security Events (Kent, 2015) | Target and source. Positives are labelled red-team authentication activity. |
 
-### Labelling
-- **CERT** — a user-day is positive if it contains an answer-key malicious event (restricted to the
-  official insiders).
-- **SPEDIA** — positive if an event is "Highly/Midly Suspicious" **or** Wazuh level ≥ 8. Every row
-  with `Decoder_name == 'cert'` is excluded; the audited real-only subset is 20,619 rows with zero
-  `dtaa.com` occurrences, zero `cert` tokens, and zero CERT-style identifiers (auditd / PAM /
-  syscheck / JSON sources only). Positive-class base rate ≈ 0.41.
-- **LANL** — positive if the user-day contains a labelled red-team authentication event. Because
-  red-team activity is confined to a sub-window, the in-distribution diagonal is reported under the
-  **user-disjoint** split only (a chronological split leaves no positives in the test window).
+## Labelling and filtering
 
-Positive-class base rates differ by roughly three orders of magnitude across domains (CERT
-≈ 0.2–0.3%, LANL ≈ 0.04%, SPEDIA ≈ 41%), which is why base-rate lift and per-cell PR-AUC are
-reported alongside any aggregate statistic. The CERT r6.2 diagonal is **not evaluable** (only 44
-positive user-days) and is excluded as a target and from the aggregate generalization gap, though
-it is retained as a training source.
+- **CERT**
+  - A user-day is positive if it contains an answer-key malicious event.
+  - Web events are sampled uniformly (p = 0.05, seed 7) for every user.
+- **SPEDIA**
+  - A user-day is positive if an event is "Highly/Midly Suspicious" or has Wazuh level ≥ 8.
+  - Every row with `Decoder_name == 'cert'` is excluded.
+  - The audited real-only subset has:
+    - 20,619 rows;
+    - zero `dtaa.com` occurrences, zero `cert` tokens and zero CERT-style identifiers;
+    - only auditd, PAM, syscheck and JSON sources.
+  - It is not subsampled. There are 82 positive user-days out of 256 (base rate 0.32).
+- **LANL**
+  - A user-day is positive if it contains a labelled red-team authentication event.
+  - Machine accounts are removed.
+  - Authentication events are sampled uniformly (p = 0.02, seed 7) for every user.
+  - There are 158 positive user-days out of 389,323. 158 of the 176 red-team user-days remain observable after sampling.
+  - The chronological split has no positives in the test period, so LANL is evaluated in distribution under the user-disjoint split only.
 
-## Named future extensions (not evaluated here)
+## Future extensions (not evaluated in the paper)
 
-- **TWOS** (Harilal et al., 2017) — real gamified masquerader/traitor data, gated behind a SUTD
-  data-sharing agreement. A natural breadth extension; identified as future work.
-- **DARPA OpTC** — a feasibility probe on the evaluation-window eCAR archives (SysClient0201, the
-  primary red-team host) found real-user attribution of only ≈5%; the telemetry is host- and
-  process-centric (FLOW/PROCESS/MODULE events emitted by NETWORK SERVICE / SYSTEM), so it does not
-  map cleanly onto the user-day prediction unit. Its ground truth is a set of malicious eCAR
-  **record IDs** (the correct labelling scheme when added). Adapting the benchmark to a host-day or
-  process-lineage unit is left for future work.
-
-## Harmonisation
-
-All datasets are mapped to a canonical event tuple `(u, h, a, t, y)` — user, host, action from a
-fixed vocabulary, timestamp, label — and aggregated to the **user-day** unit. Raw actions are mapped
-to a shared vocabulary (unsupported actions map to a reserved `unknown` class rather than being
-dropped). Dataset identifiers, raw user/host names, and source-specific record identifiers are
-deliberately excluded so models cannot exploit corpus fingerprints. See [`METHODS.md`](METHODS.md).
+- **TWOS** (Harilal et al., 2017): real gamified masquerader/traitor data, available under a data-sharing agreement.
+- **DARPA OpTC:** host- and process-centric telemetry that does not map cleanly onto the user-day unit. A host-day or process-level unit would be needed.

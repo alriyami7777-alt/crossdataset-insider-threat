@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this benchmark or code, please cite the accompanying paper (under review)."
+message: "If you use this benchmark or code, please cite the accompanying paper."
 title: "Does It Generalize? A Cross-Dataset Study of Graph-Based Insider Threat Detection Beyond CERT"
 authors:
   - family-names: "Alriyami"
@@ -9,6 +9,6 @@ authors:
     given-names: "Mohd Murtadha Bin"
     affiliation: "Universiti Teknologi Malaysia"
 year: 2026
-notes: "Paper under review (IJACSA). A full citation will be added on acceptance."
+notes: "Camera-ready version accepted in the International Journal of Advanced Computer Science and Applications (IJACSA), Vol. 17, No. 9, 2026 (manuscript MS-17-9-0257)."
 repository-code: "https://github.com/alriyami7777-alt/crossdataset-insider-threat"
 license: MIT

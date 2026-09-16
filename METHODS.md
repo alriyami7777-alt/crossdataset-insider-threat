@@ -1,89 +1,102 @@
-# Methods and Protocol
+# Methods and protocol (camera-ready)
 
-This document summarises the evaluation protocol so results in this repository are
-interpretable and reproducible. It mirrors the methodology of the paper, which evaluates
-**CERT, SPEDIA, and LANL** (TWOS and DARPA OpTC are named future extensions; see
-[`DATASETS.md`](DATASETS.md)).
+This document summarises the protocol behind the camera-ready results in [`camera_ready_strict_2026_09/`](camera_ready_strict_2026_09/).
 
-## Prediction unit and label
+**Evaluated domains:** CERT r4.2, r5.2 and r6.2; SPEDIA; LANL.
 
-The common unit of analysis is the **user-day**. For user `u` and day `d`, the
-binary label is positive when at least one event in that interval satisfies the
-dataset-specific malicious-event or malicious-span rule. This preserves each
-dataset's documented labelling semantics while enforcing a shared target.
+**Not evaluated:** TWOS and DARPA OpTC are future extensions only.
 
-## Canonical event and graph
+## Prediction unit and labels
 
-Every raw event is mapped to a canonical tuple `(u, h, a, t, y)` — user, host,
-action from a fixed vocabulary `A`, timestamp, label. Each domain is represented
-as a heterogeneous temporal graph over user and host nodes with action-typed,
-timestamped edges. Unsupported raw actions map to a reserved "unknown" class
-rather than being dropped.
+The unit of labelling, prediction and evaluation is the **user-day**. A user-day is positive when it contains at least one event that meets the dataset-specific malicious-event rule:
 
-## Aligned, content-free features
+- **CERT:** an answer-key event.
+- **SPEDIA:** "Highly/Midly Suspicious", or Wazuh level ≥ 8.
+- **LANL:** a red-team authentication event.
 
-User-day feature vectors contain counts, binary activity indicators, and timing
-variables computable consistently across datasets. **Per-user causal deviation
-features** express each value relative to the same user's strictly-earlier
-history:
+## Event sampling (label-independent)
 
-```
-dev_x(u, d) = ( x_{u,d} - mean_{u,<d} ) / ( std_{u,<d} + eps )
-```
+Two event sources are subsampled, with the same rate for every user and a fixed seed (7):
 
-computed only from days before `d` (zero on a user's first day). This is
-leakage-safe under temporal, user-disjoint, and cross-dataset evaluation.
-Dataset identifiers, raw user/host names, and source-specific record IDs are
-excluded.
+- **CERT web (`http.csv`):** each event is kept with probability 0.05.
+- **LANL authentication (non-machine accounts):** each event is kept with probability 0.02.
 
-## Evaluation settings
+**Rules**
 
-1. **Zero-shot cross-dataset generalization (primary).** Train on a source domain
-   with labelled data only; evaluate on each target with **no** access to target
-   labels, unlabelled target data, target statistics, or target model-selection
-   signals. Produces a source-by-target PR-AUC matrix `M[i][j]`.
-2. **Unsupervised domain adaptation (UDA), reported separately.** Labelled source
-   plus **unlabelled** target used for domain-adversarial training. Because the
-   target distribution participates in training, these results are never included
-   in the zero-shot claim.
-3. **Leave-one-domain-out (LODO).** Train on the union of all domains except the
-   held-out target; test on the held-out target. Tests whether source diversity
-   improves transfer.
+- The keep decision depends only on the random draw. It does not use user identity, ground-truth rosters or labels.
+- Labels are attached after sampling.
+- All other CERT sources are kept in full.
+- SPEDIA is not subsampled.
 
-## In-distribution controls
+**Verification.** Row-level checks are published in `camera_ready_strict_2026_09/results/manifests/sampling_verification_*.json`.
 
-For every dataset the diagonal is reported under both a **chronological temporal
-split** and a **user-disjoint split** (no shared users between train and test).
-These controls distinguish genuine in-distribution skill from temporal proximity
-or user memorisation.
+**Observability.** For LANL, 158 of the 176 red-team user-days remain observable after sampling.
 
-## Metrics
+## Canonical events and features
 
-- **PR-AUC** is the headline metric because positive user-days are rare.
-- **Base-rate lift** (`PR-AUC / base_rate`) is reported alongside, since class
-  prevalence differs sharply across datasets (CERT ≈ 0.2–0.3%, LANL ≈ 0.04%,
-  SPEDIA ≈ 41%).
-- **Generalization gap**: uniformly-weighted mean of diagonal cells minus
-  uniformly-weighted mean of off-diagonal cells (the degenerate CERT r6.2 diagonal
-  is excluded). Reported as a transparency statistic — because it mixes targets whose
-  base rates differ by ~1000×, the per-cell transfer matrix is the primary evidence.
-- All metrics are accompanied by **stratified bootstrap confidence intervals**;
-  transfer deltas are claimed only when the CI excludes zero.
+- **Canonical events.** Every event is mapped to `(u, h, a, t, y)` using a 16-action vocabulary. No evaluated event maps to `unknown`.
+- **User-day features.** Aligned, content-free counts, activity flags and timing variables.
+- **Causal per-user deviation features.** For each feature:
 
-## Domain gap
+  ```
+  dev_x(u, d) = ( x_{u,d} - mean_{u,<d} ) / ( std_{u,<d} + eps )
+  ```
 
-Distributional distance between domains is reported with a domain-classifier
-proxy-Â-distance and MMD on the aligned feature space, as a **descriptive** indicator
-of where transfer is hardest. It is not treated as a quantitative law: proxy-Â-distance
-is saturated near its maximum for almost all pairs (within-CERT pairs are near-maximal
-yet still transfer well, while transfers into LANL collapse at comparable distance), so
-the per-cell transfer matrix remains the primary evidence.
+  - Only strictly earlier days of the same user are used, via a one-day shift.
+  - The first day of each user is set to 0.
+- **Standardisation.** Fitted on source training users only.
 
-## Explainability as a transfer diagnostic
+## Models
 
-Integrated gradients over the **aligned user-day features** produce per-domain attribution
-profiles; comparing source and target profiles separates signals that stay influential
-across datasets from those that behave as dataset-specific artefacts. Action-embedding
-attribution and temporal-edge occlusion are complementary event-level diagnostics outlined
-for future analysis rather than quantified here. These explanations are interpreted
-diagnostically, not causally.
+- **Random Forest (reference model)**
+  - 300 trees with balanced-subsample class weights.
+  - Evaluated on the full source-by-target matrix and on both in-distribution splits.
+- **Temporal GNN**
+  - Architecture:
+    - 64-dimensional user and host GRU memories, updated in chronological event order.
+    - A 16-dimensional action embedding.
+    - Causal self-supervised next-action pretraining.
+  - Time handling: `use_time_encoding=False`, and the time channel is zeroed. Temporal information enters only through chronological memory updates.
+  - Training:
+    - AdamW optimiser: learning rate 3e-4, weight decay 1e-4.
+    - Early stopping on 15% of the source training users.
+    - Deterministic GPU settings.
+  - Evaluated on:
+    - the in-distribution controls for CERT r4.2, CERT r5.2 and SPEDIA;
+    - the transfers CERT r4.2→SPEDIA and CERT r5.2→SPEDIA.
+  - The full GNN transfer matrix was not computed.
+
+## Evaluation
+
+- **Zero-shot transfer**
+  - Train on the complete source domain and score the complete target domain.
+  - No target data, statistics or model-selection signal is used.
+- **In-distribution controls**
+  - **Chronological split:** the cut is at the 0.7 quantile of user-days (RF) or of event timestamps (GNN).
+  - **User-disjoint split:** 70/30 by user, stratified by whether the user has any positive user-day.
+- **Evaluable targets**
+  - A domain is a target only if it has at least 50 positive user-days. CERT r6.2 (44) is therefore a source only.
+  - LANL has no positive user-days in its chronological test period, so its chronological score is n/e.
+- **Metrics**
+  - PR-AUC (average precision) and base-rate lift, over five seeds (0–4).
+  - Model differences: mean paired per-seed difference with a 95% percentile bootstrap interval (5,000 resamples).
+  - No aggregate significance test is reported.
+- **Generalization gap**
+  - Formula:
+
+    ```
+    Δ = mean_{j∈T} M[j][j] − mean_{(i,j)∈P} M[i][j],   P = {(i,j): i∈S, j∈T, i≠j}
+    ```
+
+  - The diagonal uses the user-disjoint split, giving Δ = 0.409.
+  - Δ is reported as a transparency statistic alongside the per-cell values and lifts.
+
+## Out of scope for the camera-ready results
+
+The following were not reported in the camera-ready paper:
+
+- target-assisted domain adaptation;
+- leave-one-domain-out training;
+- domain-gap (proxy-A/MMD) analysis;
+- component ablations;
+- explainability-based diagnostics.
