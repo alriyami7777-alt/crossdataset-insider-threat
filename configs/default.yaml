@@ -1,34 +1,34 @@
-# Central config. Cross-dataset experiments read from here.
+# LEGACY development config (kept for provenance). The camera-ready driver
+# scripts/strict_camera_ready_2026_09_15.py does NOT read this file; see
+# camera_ready_strict_2026_09/README.md for the camera-ready settings.
 seed: 7
 
-# Dataset file paths. Leave null to fall back to the synthetic generator.
-# Fill these in on the machine that has the real data (Cursor / GPU box).
+# Dataset file paths. Fill these in locally; raw data are not redistributed.
 data:
-  cert:   null          # dir of CERT r5.2/r6.2 csvs
+  cert:   null          # dir of CERT r4.2/r5.2/r6.2 csvs
   lanl:   null          # path to auth.txt (+ redteam.txt alongside)
-  twos:   null          # TWOS root once access is granted
-  spedia: "C:/PhD/04_Journal_Papers/New Paper Aug 2026/logs_SPEDIA.csv"
+  spedia: null          # path to logs_SPEDIA.csv
   spedia_real_only: true   # drop CERT-derived rows for clean cross-dataset
 
-# Which datasets participate in the cross-dataset matrix.
-datasets: [cert, spedia, lanl, twos]
+# Datasets evaluated in the paper. TWOS and DARPA OpTC are future work only.
+datasets: [cert, spedia, lanl]
 
-# Model to run as the matrix cell detector.
+# Model to run as the matrix cell detector (legacy development option).
 model: isolation_forest   # isolation_forest | ocsvm | temporal_gnn | athitd | transformer
 
 metric: pr_auc            # headline metric
 
 temporal_gnn:
   mem_dim: 64
-  time_dim: 16
+  time_dim: 16             # legacy; the camera-ready GNN uses no explicit time encoding
   lr: 0.001
   epochs: 20
   batch_edges: 4096
-  ssl_pretrain_epochs: 5   # masked-action self-supervised pretraining
+  ssl_pretrain_epochs: 5
 
 dann:
-  enabled: true
-  gamma: 10.0              # lambda-schedule steepness
+  enabled: true            # legacy; no domain-adaptation result is reported in the paper
+  gamma: 10.0
 
 eval:
   target_fprs: [0.01, 0.05]
