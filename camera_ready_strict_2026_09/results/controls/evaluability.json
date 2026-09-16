@@ -1,0 +1,14 @@
+{
+ "min_source_pos_warn": 50,
+ "lanl_rf_test_positives": 0,
+ "lanl_gnn_test_event_positives": 0,
+ "lanl_gnn_test_pos_userdays": 0,
+ "lanl_chronological": "N_E",
+ "lanl_note": "0 positive TEST user-days after frozen day.quantile(0.7); PR-AUC not reported.",
+ "cert62_total_pos_user_days": 44,
+ "cert62_rf_test_positives": 38,
+ "cert62_gnn_test_pos_userdays": 38,
+ "cert62_user_disjoint": "N_E",
+ "cert62_chronological": "N_E",
+ "cert62_note": "Same pre-existing rule: CERT r6.2 is n/e as target when positive user-days < MIN_SOURCE_POS_WARN=50 (domain total previously/now 44; chronological TEST positives=38). PR-AUC not reported."
+}

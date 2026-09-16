@@ -1,0 +1,14 @@
+{
+ "use_time_encoding": false,
+ "use_memory": true,
+ "dt_all_zero_base": true,
+ "dt_all_zero_shifted": true,
+ "dt_identical": true,
+ "score_difference": 0.0,
+ "gnn_kwargs": {
+  "use_time_encoding": false,
+  "use_memory": true,
+  "use_dann": false,
+  "seed": 0
+ }
+}
