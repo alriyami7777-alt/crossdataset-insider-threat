@@ -1,0 +1,56 @@
+{
+ "domain": "cert42",
+ "roster_size": 70,
+ "frac": 0.05,
+ "seed": 7,
+ "strict_rows": 5756225,
+ "orig_rows": 6997154,
+ "strict_pos_rows": 22703,
+ "orig_pos_rows": 98474,
+ "nonroster_or_unsampled_identical": true,
+ "nonroster_only_in_strict": 0,
+ "nonroster_only_in_orig": 0,
+ "roster_sampled_rows_strict": 65049,
+ "roster_sampled_rows_orig": 1305978,
+ "roster_strict_subset_of_orig": true,
+ "roster_keep_rate": 0.04980864915029196,
+ "roster_keep_rate_z_vs_frac": -1.003347841683719,
+ "nonroster_sampled_rows": 1355377,
+ "passed": true,
+ "raw_path": "<DATA_ROOT>\\CERT\\r4.2",
+ "original_events_cache": "<REPO_ROOT>\\results\\cache\\transfer_5d\\cert42_events.parquet",
+ "keep_rule_diff": {
+  "old": "keep = is_ins | (rng.random(len(chunk)) < benign_http_frac)",
+  "new": "keep = rng.random(len(chunk)) < benign_http_frac  # STRICT label-agnostic",
+  "frozen_source_sha256": "cd821298414eed6e281a3493f5ccd63220ec00337cd3da49a39315276ea28e7c",
+  "strict_source_sha256": "6364a4723daae79200bdd4f59b23baac029489a112f0e0687542a4684ed8d42c",
+  "keep_rule_names": [
+   "benign_http_frac",
+   "chunk",
+   "len",
+   "rng"
+  ],
+  "all_keep_assignments_names": [
+   [
+    "benign_http_frac",
+    "chunk",
+    "len",
+    "rng"
+   ]
+  ]
+ },
+ "feature_path_parity": {
+  "domain": "cert42",
+  "rows_from_events": 330452,
+  "rows_cache": 330452,
+  "rows_only_one_side": 0,
+  "max_abs_diff_any_column": 0.000541342596989125,
+  "passed": true,
+  "tolerance": 0.001,
+  "original_feat_path": "<REPO_ROOT>\\results\\cache\\transfer_5d\\cert42_user_day_dev.parquet",
+  "note": "orig-vs-orig audit only; strict features are rebuilt from strict events"
+ },
+ "strict_feature_rows": 330452,
+ "strict_feature_pos": 966,
+ "wall_s": 292.6
+}

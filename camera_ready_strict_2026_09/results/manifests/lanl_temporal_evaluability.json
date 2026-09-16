@@ -1,0 +1,12 @@
+{
+ "domain": "lanl",
+ "rf_cut_day": "2015-02-10 00:00:00",
+ "rf_test_userdays": 116299,
+ "rf_test_pos": 0,
+ "gnn_cut_event_time": "2015-02-12 23:20:16.100000",
+ "gnn_test_event_pos": 0,
+ "first_pos_day": "2015-01-02 00:00:00",
+ "last_pos_day": "2015-01-30 00:00:00",
+ "n_pos_userdays": 158,
+ "evaluable": false
+}

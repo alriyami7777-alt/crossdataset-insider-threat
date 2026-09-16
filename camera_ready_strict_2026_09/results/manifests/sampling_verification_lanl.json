@@ -1,0 +1,62 @@
+{
+ "domain": "lanl",
+ "roster_size": 98,
+ "frac": 0.02,
+ "seed": 7,
+ "strict_rows": 8365294,
+ "orig_rows": 28174302,
+ "strict_pos_rows": 28071,
+ "orig_pos_rows": 1418225,
+ "nonroster_or_unsampled_identical": true,
+ "nonroster_only_in_strict": 0,
+ "nonroster_only_in_orig": 0,
+ "roster_sampled_rows_strict": 404465,
+ "roster_sampled_rows_orig": 20213473,
+ "roster_strict_subset_of_orig": true,
+ "roster_keep_rate": 0.0200096737458229,
+ "roster_keep_rate_z_vs_frac": 0.3106612646231066,
+ "nonroster_sampled_rows": 7960829,
+ "passed": true,
+ "raw_path": "<DATA_ROOT>\\lanl",
+ "original_events_cache": "<DATA_ROOT>\\lanl\\_cache_load_lanl_redteam_aware_bf002.parquet",
+ "keep_rule_diff": {
+  "old": "keep = is_rt | (rng.random(len(chunk)) < benign_frac)",
+  "new": "keep = rng.random(len(chunk)) < benign_frac  # STRICT label-agnostic",
+  "frozen_source_sha256": "fd5f188550f5a8cd2a176fd135e2d30bf356c32c8c1e8064b9e51a4422501ec2",
+  "strict_source_sha256": "9aad34914aa3dd1bcfa8560933fa690bf0b2f52268eb607589fd267118059845",
+  "keep_rule_names": [
+   "benign_frac",
+   "chunk",
+   "len",
+   "rng"
+  ],
+  "all_keep_assignments_names": [
+   [
+    "benign_frac",
+    "chunk",
+    "len",
+    "rng"
+   ],
+   [
+    "bool",
+    "chunk",
+    "len",
+    "np"
+   ]
+  ]
+ },
+ "feature_path_parity": {
+  "domain": "lanl",
+  "rows_from_events": 389738,
+  "rows_cache": 389738,
+  "rows_only_one_side": 0,
+  "max_abs_diff_any_column": 0.0,
+  "passed": true,
+  "numerical_audit_only": true,
+  "original_feat_path": "<REPO_ROOT>\\results\\cache\\transfer_5d\\lanl_user_day_dev.parquet",
+  "note": "orig-vs-orig row identity is fail-closed; max_abs_diff is AUDIT ONLY (stream_cert vs user_day_features float noise). Strict features are rebuilt from strict events, not copied from transfer_5d."
+ },
+ "strict_feature_rows": 389323,
+ "strict_feature_pos": 158,
+ "wall_s": 4413.5
+}

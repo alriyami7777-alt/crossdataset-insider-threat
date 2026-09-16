@@ -1,0 +1,84 @@
+{
+  "domain": "cert42",
+  "events_path": "<REPO_ROOT>\\results\\strict_camera_ready_2026_09_15\\cache\\cert42\\events.parquet",
+  "features_path": "<REPO_ROOT>\\results\\strict_camera_ready_2026_09_15\\cache\\cert42\\user_day_dev.parquet",
+  "n_events": 5756225,
+  "n_users": 1000,
+  "n_user_days": 330452,
+  "n_positive_events": 22703,
+  "n_positive_user_days": 966,
+  "events_sha256": "e8e187b6b21efe1533317051b47fec929897933be3d257705fd9fe6181bcd1a0",
+  "features_sha256": "ae5a196cd7a3f98cb1073f323e2adaf630271a0ab5311304bafdce80cbf7f5d1",
+  "rss_gb": 2.017,
+  "protocol": "cert_http_uniform_5pct_then_labels",
+  "sample_seed": 7,
+  "http_frac": 0.05,
+  "http_raw_rows": 28434423,
+  "http_kept_rows": 1420426,
+  "n_events_before_labels": 5756225,
+  "raw_files": {
+    "logon.csv": {
+      "path": "<DATA_ROOT>\\CERT\\r4.2\\logon.csv",
+      "bytes": 58514706,
+      "mtime_unix": 1328182132.0,
+      "sha256_head_8mib": "617f95a5ed581cff1d238c47c5ebbe31d31f68696014242c179722208e899f67",
+      "sha256": "a770601339829d544535b3cb08b2f2020a1feaa81bd88cdbfc2d452444f12a13"
+    },
+    "device.csv": {
+      "path": "<DATA_ROOT>\\CERT\\r4.2\\device.csv",
+      "bytes": 28982749,
+      "mtime_unix": 1328182120.0,
+      "sha256_head_8mib": "d4c6ec047502717702e699500d8ed61eb0c10d64c712e371a3df76497dab1289",
+      "sha256": "39925627f0219c77dbb39e5a416715298ef47c2fd25322aa44c66cb128d7291d"
+    },
+    "file.csv": {
+      "path": "<DATA_ROOT>\\CERT\\r4.2\\file.csv",
+      "bytes": 193055265,
+      "mtime_unix": 1328182166.0,
+      "sha256_head_8mib": "43891e97f6a15c706f20e3c799a1956ef7cd5bca292051d3f63d1c77632bbaf0",
+      "sha256": "637281bd6d8947b2cccf90bca7096e8cfad711eab1e425c61f886b0e4edfda7f"
+    },
+    "email.csv": {
+      "path": "<DATA_ROOT>\\CERT\\r4.2\\email.csv",
+      "bytes": 1362101939,
+      "mtime_unix": 1328182536.0,
+      "sha256_head_8mib": "f39a480ab502e875541257214af13b94a697e199e20f4d8dff0517651a63ab44",
+      "sha256": null,
+      "sha256_note": "file >512MiB; full hash omitted (head+size+mtime recorded)"
+    },
+    "http.csv": {
+      "path": "<DATA_ROOT>\\CERT\\r4.2\\http.csv",
+      "bytes": 14536257467,
+      "mtime_unix": 1328185202.0,
+      "sha256_head_8mib": "553d16a2f4db7562f5892cf28cdc5418f12928a9582788ab45643c7e659dc9fa",
+      "sha256": null,
+      "sha256_note": "file >512MiB; full hash omitted (head+size+mtime recorded)"
+    }
+  },
+  "answers_dir": "<DATA_ROOT>\\CERT\\answers",
+  "release": "4.2",
+  "keep_audit": {
+    "ok": true,
+    "hits": [],
+    "n_args": [
+      "n",
+      "rng",
+      "p"
+    ]
+  },
+  "http_keep_rate_audit": {
+    "mean_all_users": 0.05002433671419018,
+    "mean_official_insiders": 0.05002622364102507,
+    "mean_non_insiders": 0.05002419468743917,
+    "n_http_users": 1000,
+    "n_official_insiders_with_http": 70,
+    "note": "post-hoc audit only; insiders were not used in KEEP"
+  },
+  "label_info": {
+    "n_official_insiders": 70,
+    "n_malicious_userdays_in_answers": 966,
+    "n_positive_events": 22703
+  },
+  "wall_s": 136.9,
+  "old_cache_not_used": true
+}

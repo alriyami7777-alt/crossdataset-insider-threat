@@ -1,0 +1,25 @@
+{
+  "domain": "spedia",
+  "protocol": "copy_verified_real_only_spedia",
+  "events_path": "<REPO_ROOT>\\results\\strict_camera_ready_2026_09_15\\cache\\spedia\\events.parquet",
+  "features_path": "<REPO_ROOT>\\results\\strict_camera_ready_2026_09_15\\cache\\spedia\\user_day_dev.parquet",
+  "n_events": 20619,
+  "n_user_days": 256,
+  "n_positive_user_days": 82,
+  "n_raw_csv_rows": 72250,
+  "n_decoder_cert_dropped": 51631,
+  "n_decoder_non_cert": 20619,
+  "live_reload_events": 20619,
+  "events_sha256": "94385b6e1a31fbb5ddc4a96a52b28413bb09057c4b1be265eae1d20b82678d9e",
+  "features_sha256": "5d1727eb7461e1c5de117bee613d315d1999711d61a9402111161334c6e523d3",
+  "origin_events_sha256": "94385b6e1a31fbb5ddc4a96a52b28413bb09057c4b1be265eae1d20b82678d9e",
+  "raw_csv": {
+    "path": "<DATA_ROOT>\\SPEDIA\\logs_SPEDIA.csv",
+    "bytes": 43042405,
+    "mtime_unix": 1785728078.952637,
+    "sha256_head_8mib": "c27b35b6ecb125865a88895e6a99fb7e4d7dc3579a476e04ae0e6f3596178064",
+    "sha256": "68a96363d8ec6d704f8508a301de72bd929e38ae72b1a6e8c5486f8a46b89d75"
+  },
+  "cert_derived_rows_reintroduced": false,
+  "wall_s": 1.1
+}
