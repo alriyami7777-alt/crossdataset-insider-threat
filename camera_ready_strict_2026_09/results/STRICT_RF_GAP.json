@@ -1,0 +1,134 @@
+{
+ "rule": "CERT r6.2 is non-evaluable as a target when positive user-days < MIN_SOURCE_POS_WARN=50 (frozen transfer-matrix warning; DATASETS.md: 44 positive user-days). Threshold not changed post hoc. Diagonals use user-disjoint. Off-diagonals use full_source. S=all sources; T=evaluable targets; P={(i,j): i in S, j in T, i!=j}.",
+ "cert62_total_positive_user_days": 44,
+ "cert62_user_disjoint_test_n_pos_mean": 4.6,
+ "cert62_as_target": "n/e",
+ "S": [
+  "cert42",
+  "cert52",
+  "cert62",
+  "spedia",
+  "lanl"
+ ],
+ "T": [
+  "cert42",
+  "cert52",
+  "spedia",
+  "lanl"
+ ],
+ "P": [
+  [
+   "cert42",
+   "cert52"
+  ],
+  [
+   "cert42",
+   "spedia"
+  ],
+  [
+   "cert42",
+   "lanl"
+  ],
+  [
+   "cert52",
+   "cert42"
+  ],
+  [
+   "cert52",
+   "spedia"
+  ],
+  [
+   "cert52",
+   "lanl"
+  ],
+  [
+   "cert62",
+   "cert42"
+  ],
+  [
+   "cert62",
+   "cert52"
+  ],
+  [
+   "cert62",
+   "spedia"
+  ],
+  [
+   "cert62",
+   "lanl"
+  ],
+  [
+   "spedia",
+   "cert42"
+  ],
+  [
+   "spedia",
+   "cert52"
+  ],
+  [
+   "spedia",
+   "lanl"
+  ],
+  [
+   "lanl",
+   "cert42"
+  ],
+  [
+   "lanl",
+   "cert52"
+  ],
+  [
+   "lanl",
+   "spedia"
+  ]
+ ],
+ "diag_cells": [
+  [
+   "cert42",
+   "cert42"
+  ],
+  [
+   "cert52",
+   "cert52"
+  ],
+  [
+   "spedia",
+   "spedia"
+  ],
+  [
+   "lanl",
+   "lanl"
+  ]
+ ],
+ "diag_means_user_disjoint": {
+  "cert42": 0.5496816080329119,
+  "cert52": 0.6254060355240104,
+  "lanl": 0.0036057501226088398,
+  "spedia": 0.9894593922392364
+ },
+ "offdiag_means_full_source": {
+  "cert42->cert52": 0.24986378140653792,
+  "cert42->lanl": 0.0008254792629722799,
+  "cert42->spedia": 0.31480152378984744,
+  "cert52->cert42": 0.38962209301531003,
+  "cert52->lanl": 0.00096761477116508,
+  "cert52->spedia": 0.36336456960457103,
+  "cert62->cert42": 0.015045351149622683,
+  "cert62->cert52": 0.13540056966373454,
+  "cert62->lanl": 0.00044680716502802,
+  "cert62->spedia": 0.3017514989505609,
+  "lanl->cert42": 0.00290463605288334,
+  "lanl->cert52": 0.0018892814438081797,
+  "lanl->spedia": 0.3411614925533978,
+  "spedia->cert42": 0.00877709157839222,
+  "spedia->cert52": 0.0036712652024201,
+  "spedia->lanl": 0.0007905186310278201
+ },
+ "mean_diag": 0.5420381964796919,
+ "mean_P": 0.13320522339007995,
+ "delta": 0.4088329730896119,
+ "historical_gap_0.484": "audit only; not assumed",
+ "n_diag": 4,
+ "n_P": 16,
+ "wilcoxon": "not computed (no full strict GNN matrix)"
+}
